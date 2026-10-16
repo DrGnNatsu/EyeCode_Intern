@@ -1,0 +1,76 @@
+{
+  "model_complexity": {
+    "total_parameters_m": 93.14,
+    "vision_encoder_parameters_m": 22.06,
+    "noise_pred_net_parameters_m": 71.08,
+    "checkpoint_size_mb": 355.43
+  },
+  "inference_latency": {
+    "mean_latency_ms": 138.97,
+    "median_latency_ms": 131.5,
+    "std_latency_ms": 20.03,
+    "p95_latency_ms": 196.23,
+    "p99_latency_ms": 200.71,
+    "min_latency_ms": 126.28,
+    "max_latency_ms": 200.76,
+    "control_frequency_hz": 7.2,
+    "measurement_samples": 50
+  },
+  "inference_memory": {
+    "peak_allocated_vram_mb": 388.16,
+    "peak_reserved_vram_mb": 412.0,
+    "current_allocated_vram_mb": 367.79,
+    "allocator_fragmentation_mb": 23.84
+  },
+  "action_accuracy": {
+    "overall_action_mse": 0.001819,
+    "overall_action_mae": 0.015368,
+    "step_error_mean": 0.131,
+    "step_error_median": 0.087,
+    "step_error_std": 0.1571,
+    "step_error_p95": 0.5396,
+    "step_error_p99": 0.8469,
+    "step_error_min": 0.0255,
+    "step_error_max": 0.8716,
+    "evaluated_timesteps": 272
+  },
+  "subsystem_breakdown": {
+    "active_perception_neck_7d": {
+      "joints": "0-6",
+      "mse": 0.000245,
+      "mae": 0.011233
+    },
+    "right_arm_manipulation_8d": {
+      "joints": "7-14",
+      "mse": 0.001584,
+      "mae": 0.016571
+    },
+    "left_arm_manipulation_8d": {
+      "joints": "15-22",
+      "mse": 0.003431,
+      "mae": 0.017784
+    },
+    "gripper_actuation_2d": {
+      "joints": "14, 22",
+      "mse": 0.017109,
+      "mae": 0.040979
+    }
+  },
+  "trajectory_smoothness": {
+    "predicted_trajectory_jerk": 0.008304,
+    "ground_truth_jerk": 0.002533,
+    "jerk_ratio_pred_vs_gt": 3.279
+  },
+  "metadata": {
+    "model_architecture": "ViA Diffusion Policy (DINOv2 ViT-S/14 + 1D Conditional U-Net)",
+    "checkpoint_path": "via_model_ckps/via_dinov2_cls_cup_ema_12.pth",
+    "dataset_path": "dataset/cup_val.zarr.zip",
+    "cuda_version": "11.8",
+    "pytorch_version": "2.7.1+cu118",
+    "tf32_enabled": true,
+    "prediction_horizon": 16,
+    "action_horizon": 8,
+    "ddim_inference_steps": 16,
+    "benchmark_timestamp": "2026-10-16T23:54:57.517398"
+  }
+}
