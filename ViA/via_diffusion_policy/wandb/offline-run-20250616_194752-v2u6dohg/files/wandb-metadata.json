@@ -1,0 +1,34 @@
+{
+  "os": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.11.8",
+  "startedAt": "2025-06-16T11:47:52.246394Z",
+  "args": [
+    "--config",
+    "config/train_via_bag.yaml"
+  ],
+  "program": "/home/haoyux/Vision-in-Action/via_diffusion_policy/train_via.py",
+  "codePath": "via_diffusion_policy/train_via.py",
+  "git": {
+    "remote": "https://github.com/haoyu-x/Vision-in-Action.git",
+    "commit": "508e77c9ed0f9d48df81d96087bac03abd5fc6f0"
+  },
+  "root": "/home/haoyux/Vision-in-Action/via_diffusion_policy",
+  "host": "haoyux-ThinkPad-T14p-Gen-2",
+  "executable": "/home/haoyux/miniforge3/envs/via/bin/python",
+  "codePathLocal": "train_via.py",
+  "cpu_count": 16,
+  "cpu_count_logical": 22,
+  "disk": {
+    "/": {
+      "total": "1006450962432",
+      "used": "72450379776"
+    }
+  },
+  "memory": {
+    "total": "33124052992"
+  },
+  "cpu": {
+    "count": 16,
+    "countLogical": 22
+  }
+}

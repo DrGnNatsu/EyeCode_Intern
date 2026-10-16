@@ -1,0 +1,28 @@
+# Dataset parameters
+pred_horizon: 16
+obs_horizon: 1
+action_horizon: 8
+
+# Paths
+dataset_path: "dataset/pot_train.zarr.zip"
+val_dataset_path: "dataset/pot_val.zarr.zip"
+model_save_dir: via_model_ckps
+model_name: via_add_wrist_dinov2_cls_pot_three_vit
+
+# Observation dimensions
+vision_feature_dim: 1152 
+lowdim_obs_dim: 23
+obs_dim: 1175
+action_dim: 23
+
+# Diffusion parameters
+num_train_DDIM_timesteps: 50
+num_test_DDIM_timesteps: 16
+
+# Training parameters
+num_epochs: 501
+learning_rate: 0.0001
+batch_size: 64
+validate_every_epoch: 50
+
+
