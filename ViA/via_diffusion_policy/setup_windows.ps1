@@ -45,6 +45,4 @@ Write-Host "`n=== Verifying Environment ===" -ForegroundColor Green
 
 Write-Host "`n==============================================================================" -ForegroundColor Green
 Write-Host " Setup complete on Windows!" -ForegroundColor Green
-Write-Host " To start training, run:" -ForegroundColor Green
-Write-Host "     .\run_train_windows.ps1" -ForegroundColor Yellow
 Write-Host "==============================================================================" -ForegroundColor Green

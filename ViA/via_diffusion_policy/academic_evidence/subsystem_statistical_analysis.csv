@@ -1,0 +1,5 @@
+subsystem,joints,dof,mse_rad2,mae_rad,mae_deg,variance_contribution_pct
+Active Perception (Neck),0-6,7,0.000245,0.011233,0.644,2.26
+Right Arm Manipulation,7-14,8,0.001584,0.016571,0.949,16.66
+Left Arm Manipulation,15-22,8,0.003431,0.017784,1.019,36.09
+Gripper Actuation,"14, 22",2,0.017109,0.040979,2.348,44.99

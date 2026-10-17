@@ -32,6 +32,7 @@
 ## Overview & Architecture
 
 ViA maps RGB camera observations to a **16-step future trajectory chunk** across **23 degrees of freedom (DOF)**:
+
 - **Active Perception Neck (7 DOF, Joints 0–6):** Controls gaze tracking and head orientation.
 - **Right Arm Manipulation (8 DOF, Joints 7–14):** Primary arm for reaching and grasping (including right gripper).
 - **Left Arm Manipulation (8 DOF, Joints 15–22):** Secondary arm for bi-manual coordination (including left gripper).
@@ -82,6 +83,7 @@ ViA/
 ## 1. Environment Setup
 
 ### Prerequisites
+
 - **OS:** Windows 10/11 (64-bit) or Ubuntu 20.04/22.04 LTS
 - **Python:** Python 3.11 (recommended)
 - **GPU:** NVIDIA GPU with CUDA support (RTX 3050 8GB, RTX 3060, RTX 4090, A100, etc.)
@@ -99,6 +101,7 @@ powershell -ExecutionPolicy Bypass -File .\setup_windows.ps1
 ```
 
 The script will:
+
 1. Detect NVIDIA GPU via `nvidia-smi`.
 2. Install `uv` if missing.
 3. Create a clean virtual environment at `.venv` (Python 3.11).
@@ -106,6 +109,7 @@ The script will:
 5. Install pinned dependencies (`diffusers==0.18.2`, `zarr==2.12.0`, `opencv-python`, `matplotlib`, `pyyaml`, etc.).
 
 To activate the environment:
+
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
@@ -147,6 +151,7 @@ uv pip install diffusers==0.18.2 accelerate==1.7.0 zarr==2.12.0 numcodecs==0.12.
 ```
 
 Verify GPU availability:
+
 ```bash
 python -c "import torch; print('CUDA Available:', torch.cuda.is_available(), '| Device:', torch.cuda.get_device_name(0))"
 ```
@@ -178,6 +183,7 @@ python train_windows_small.py --config config/train_windows_small.yaml
 ```
 
 To override directories from the command line:
+
 ```powershell
 python train_windows_small.py `
     --config config/train_windows_small.yaml `
@@ -197,6 +203,7 @@ python train_ubuntu_small.py --config config/train_ubuntu_small.yaml
 ### Training Outputs & Separated Logging
 
 Checkpoints and logs are strictly isolated:
+
 - **Model Weights (`via_model_ckps/`):**
   - `via_dinov2_cls_cup_0.pth` (Raw optimizer weights after epoch 0)
   - `via_dinov2_cls_cup_ema_0.pth` (Exponential Moving Average weights used for inference)
@@ -247,6 +254,7 @@ python benchmark_via.py `
 ```
 
 ### Generated Benchmark Artifacts (`benchmark_evidence/`)
+
 - `benchmark_report.json`: Machine-readable metrics (MSE, MAE in rad & deg, Latency percentiles, Jerk).
 - `benchmark_summary.md`: Markdown summary table ready for copy-pasting into reports.
 - `benchmark_metrics.csv`: Raw per-sample error distribution.
@@ -269,6 +277,7 @@ python infer_single_sample.py `
 ```
 
 This generates:
+
 - `inference_output/inference_sample_0.png` (Static 6-panel analysis dashboard)
 - `inference_output/inference_sample_0.json` (Exact metrics: MSE, MAE, Latency, Peak VRAM)
 
@@ -297,6 +306,7 @@ python infer_single_sample.py `
 ```
 
 This produces:
+
 - `inference_output/inference_sample_0.mp4`: A 10 FPS video clip showing the robot camera view with a live HUD and synchronized joint movement indicators.
 - `inference_output/sample_0_frames/frame_00.png` ... `frame_15.png`: 16 individual frame dumps suitable for reports or presentations.
 
@@ -305,18 +315,24 @@ This produces:
 ## Hardware & Troubleshooting Guide
 
 ### 1. Enabling TensorFloat-32 (TF32) for NVIDIA RTX 30xx / 40xx / Ada / Hopper
+
 Both `train_windows_small.py` and `infer_single_sample.py` automatically enable TF32 precision:
+
 ```python
 if torch.cuda.is_available():
     torch.set_float32_matmul_precision('high')
 ```
+
 This yields a **3x–8x speedup** on matrix multiplications with zero loss in training convergence.
 
 ### 2. Out of Memory (OOM) on 8GB GPUs
+
 If you experience CUDA OOM on 8GB cards (e.g., RTX 3050/3060):
+
 - Reduce `batch_size: 8` in `config/train_windows_small.yaml`.
 - Ensure other GPU applications are closed.
 - Keep `test_diffusion_steps: 16` during evaluation instead of 50.
 
 ### 3. Windows Terminal Character Encoding
+
 All inference and benchmark scripts use pure ASCII terminal log format (`[+]`, `[-]`, `[OK]`, `deg`, `rad^2`) to prevent `UnicodeEncodeError` crashes on Windows `cp1252` code pages.

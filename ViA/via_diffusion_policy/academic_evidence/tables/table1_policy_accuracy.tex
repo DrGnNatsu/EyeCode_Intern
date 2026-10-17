@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Quantitative Policy Tracking Accuracy of ViA on the Cup Bimanual Manipulation Task.}
+\label{tab:policy_accuracy}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{95\% CI} & \textbf{Unit} & \textbf{Interpretation} \\
+\midrule
+Overall Action MSE & 0.001819 & --- & $\text{rad}^2$ & Primary Paper Objective \\
+Overall Action MAE & 0.015368 & --- & rad & Mean Absolute Joint Error \\
+Mean Angular Error & 0.88$^\circ$ & --- & deg & Physical Geometric Deviation \\
+Step Error (Mean) & 0.1310 & [0.1122, 0.1498] & rad & Average Euclidean Distance \\
+Step Error (Median / P50) & 0.0870 & --- & rad & Typical Trajectory Error \\
+Step Error (P95) & 0.5396 & --- & rad & Challenging Phase Bound \\
+Step Error (P99) & 0.8469 & --- & rad & Extreme Outlier Bound \\
+Trajectory Jerk (Model) & 0.008304 & --- & $\text{rad}^2/\text{step}^2$ & Motor Jerk Variation \\
+Trajectory Jerk (Human GT) & 0.002533 & --- & $\text{rad}^2/\text{step}^2$ & Demonstration Baseline \\
+Jerk Ratio (Model / GT) & 3.279 & --- & $\times$ & Smoothness Ratio \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,106 @@
+{
+  "benchmark_profile": {
+    "title": "Vision in Action (ViA) Empirical Evaluation Profile",
+    "model_architecture": "ViA Diffusion Policy (DINOv2 ViT-S/14 + 1D Conditional U-Net)",
+    "checkpoint_evaluated": "via_model_ckps/via_dinov2_cls_cup_ema_12.pth",
+    "total_model_parameters_m": 93.14,
+    "vision_encoder_parameters_m": 22.06,
+    "denoiser_parameters_m": 71.08,
+    "checkpoint_disk_size_mb": 355.43,
+    "evaluation_timesteps": 272,
+    "prediction_horizon": 16,
+    "action_horizon": 8,
+    "ddim_reverse_steps": 16,
+    "tf32_acceleration": true
+  },
+  "policy_accuracy_statistics": {
+    "overall_action_mse_rad2": 0.001819,
+    "overall_action_mae_rad": 0.015368,
+    "overall_action_mae_deg": 0.880521539557049,
+    "step_euclidean_error": {
+      "mean_rad": 0.131,
+      "ci95_lower_rad": 0.11224644109406617,
+      "ci95_upper_rad": 0.14975355890593384,
+      "std_rad": 0.1571,
+      "median_rad": 0.087,
+      "p95_tail_error_rad": 0.5396,
+      "p99_extreme_error_rad": 0.8469,
+      "min_rad": 0.0255,
+      "max_rad": 0.8716
+    }
+  },
+  "subsystem_decomposition": [
+    {
+      "subsystem": "Active Perception (Neck)",
+      "joints": "0-6",
+      "dof": 7,
+      "mse_rad2": 0.000245,
+      "mae_rad": 0.011233,
+      "mae_deg": 0.6436034912704537,
+      "weighted_variance": 0.001715,
+      "variance_contribution_pct": 2.255006377131737
+    },
+    {
+      "subsystem": "Right Arm Manipulation",
+      "joints": "7-14",
+      "dof": 8,
+      "mse_rad2": 0.001584,
+      "mae_rad": 0.016571,
+      "mae_deg": 0.9494483623112872,
+      "weighted_variance": 0.012672,
+      "variance_contribution_pct": 16.662064612835785
+    },
+    {
+      "subsystem": "Left Arm Manipulation",
+      "joints": "15-22",
+      "dof": 8,
+      "mse_rad2": 0.003431,
+      "mae_rad": 0.017784,
+      "mae_deg": 1.0189481428606562,
+      "weighted_variance": 0.027448,
+      "variance_contribution_pct": 36.090621014292665
+    },
+    {
+      "subsystem": "Gripper Actuation",
+      "joints": "14, 22",
+      "dof": 2,
+      "mse_rad2": 0.017109,
+      "mae_rad": 0.040979,
+      "mae_deg": 2.3479237486666005,
+      "weighted_variance": 0.034218,
+      "variance_contribution_pct": 44.99230799573981
+    }
+  ],
+  "trajectory_dynamics_and_smoothness": {
+    "predicted_jerk_rad2_per_step2": 0.008304,
+    "ground_truth_jerk_rad2_per_step2": 0.002533,
+    "jerk_ratio_pred_vs_gt": 3.279
+  },
+  "computational_efficiency_and_realtime": {
+    "mean_latency_ms": 138.97,
+    "ci95_latency_ms": [
+      133.27753698442052,
+      144.66246301557948
+    ],
+    "median_latency_ms": 131.5,
+    "std_latency_ms": 20.03,
+    "p95_latency_ms": 196.23,
+    "p99_latency_ms": 200.71,
+    "control_frequency_hz": 7.2,
+    "peak_allocated_vram_mb": 388.16,
+    "peak_reserved_vram_mb": 412.0,
+    "allocator_fragmentation_mb": 23.84
+  },
+  "training_convergence_metrics": {
+    "total_epochs": 14,
+    "total_training_time_sec": 1336.1399999999999,
+    "avg_epoch_duration_sec": 95.43857142857142,
+    "initial_train_loss": 0.38603,
+    "final_train_loss": 0.01315,
+    "train_loss_reduction_pct": 96.59352900033676,
+    "initial_val_action_mse": 0.088329,
+    "best_val_action_mse": 0.000714,
+    "best_val_epoch": 12,
+    "val_mse_reduction_pct": 99.19165845871683
+  }
+}

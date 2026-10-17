@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Robotic Subsystem Error Decomposition across 23 Degrees of Freedom.}
+\label{tab:subsystem_breakdown}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Robotic Subsystem} & \textbf{Joints} & \textbf{DOF} & \textbf{MSE ($\text{rad}^2$)} & \textbf{MAE (rad)} & \textbf{MAE (deg)} & \textbf{Error Share (\%)} \\
+\midrule
+Active Perception (Neck) & 0-6 & 7 & 0.000245 & 0.011233 & 0.64$^\circ$ & 2.3\% \\
+Right Arm Manipulation & 7-14 & 8 & 0.001584 & 0.016571 & 0.95$^\circ$ & 16.7\% \\
+Left Arm Manipulation & 15-22 & 8 & 0.003431 & 0.017784 & 1.02$^\circ$ & 36.1\% \\
+Gripper Actuation & 14, 22 & 2 & 0.017109 & 0.040979 & 2.35$^\circ$ & 45.0\% \\
+\midrule
+\textbf{Total / Overall Action} & \textbf{0--22} & \textbf{23} & \textbf{0.001819} & \textbf{0.015368} & \textbf{0.88$^\circ$} & \textbf{100.0\%} \\
+\bottomrule
+\end{tabular}
+\end{table}

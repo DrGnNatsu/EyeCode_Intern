@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\caption{Computational Footprint, Memory Profile, and Latency on NVIDIA RTX 3050 Laptop GPU.}
+\label{tab:system_efficiency}
+\begin{tabular}{lccc}
+\toprule
+\textbf{System Characteristic} & \textbf{Measured Value} & \textbf{Unit} & \textbf{Operational Note} \\
+\midrule
+Vision Backbone (DINOv2 ViT-S/14) & 22.06 & M parameters & Frozen Visual Encoder \\
+Diffusion Denoiser (1D Conditional U-Net) & 71.08 & M parameters & Trainable Diffusion Policy \\
+Total Model Parameters & 93.14 & M parameters & Complete Architecture \\
+Checkpoint Size on Disk & 355.43 & MB & PyTorch Serialized Model \\
+\midrule
+Mean Inference Latency ($\tau$) & 138.97 $\pm$ 20.03 & ms & Microsecond CUDA Event Timer \\
+Median Latency (P50) & 131.50 & ms & Robust Central Value \\
+95th Percentile Latency (P95) & 196.23 & ms & Real-Time Safety Upper Bound \\
+Control Frequency ($f = 1000/\tau$) & 7.20 & Hz & Policy Replanning Rate \\
+\midrule
+Peak Allocated VRAM & 388.16 & MB & Active PyTorch Tensor Memory \\
+Peak Reserved VRAM & 412.00 & MB & CUDA Caching Allocator Bound \\
+Allocator Fragmentation & 23.84 & MB & Low Fragmentation Margin \\
+\bottomrule
+\end{tabular}
+\end{table}

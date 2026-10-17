@@ -159,6 +159,7 @@ Hệ thống cung cấp các script tự động trích xuất và lưu trữ to
    - Chạy kiểm thử hàng loạt, phân tích phân phối sai số (MSE, MAE, P50, P95, P99), đo thời gian CUDA Events và bộ nhớ VRAM.
    - Xuất tự động: `benchmark_report.json`, `benchmark_summary.md`, `benchmark_metrics.csv`, và thư mục đồ thị `plots/`.
    - Lệnh chạy:
+
      ```powershell
      python benchmark_via.py --config config/train_windows_small.yaml --checkpoint via_model_ckps/via_dinov2_cls_cup_ema_0.pth --dataset dataset/cup_val.zarr.zip --output-dir benchmark_evidence
      ```
@@ -168,6 +169,7 @@ Hệ thống cung cấp các script tự động trích xuất và lưu trữ to
    - Xuất dashboard 6 panel phân tích trực quan (`inference_sample_0.png`), xuất số liệu JSON (`inference_sample_0.json`).
    - Hỗ trợ xuất từng frame ảnh độc lập (`--save-frames`) và ghép video MP4 (`--video`) mô phỏng 16 bước hành động với camera overlay.
    - Lệnh chạy:
+
      ```powershell
      python infer_single_sample.py --sample-idx 0 --video --save-frames --output-dir inference_output
      ```

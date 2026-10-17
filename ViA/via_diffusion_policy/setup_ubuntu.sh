@@ -53,6 +53,4 @@ python -c "import torch; print('PyTorch Version:', torch.__version__, '| CUDA Av
 echo "=============================================================================="
 echo " Setup complete! To activate the environment in your shell, run:"
 echo "     source .venv/bin/activate"
-echo " To start training, run:"
-echo "     bash run_train_ubuntu.sh"
 echo "=============================================================================="

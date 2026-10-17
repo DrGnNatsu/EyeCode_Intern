@@ -5,8 +5,9 @@ Generated: 2026-10-16T23:54:57.517398
 ---
 
 ## 1. Experimental Conditions & Hardware Metadata
+
 | Parameter | Value |
-|---|---|
+| --- | --- |
 | **Model Architecture** | ViA Diffusion Policy (DINOv2 ViT-S/14 + 1D Conditional U-Net) |
 | **Checkpoint** | `via_model_ckps/via_dinov2_cls_cup_ema_12.pth` |
 | **Dataset** | `dataset/cup_val.zarr.zip` |
@@ -19,8 +20,9 @@ Generated: 2026-10-16T23:54:57.517398
 ---
 
 ## 2. Primary Policy Accuracy (Official Paper Metric)
+
 | Metric | Full Name | Value | Unit | Interpretation |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Action MSE** | Action Mean Squared Error | **0.001819** | rad² | Primary validation loss (official metric) |
 | **Action MAE** | Action Mean Absolute Error | **0.015368** | rad | Mean absolute joint angular error |
 | **Median Error** | 50th Percentile Error | 0.087 | rad | Typical trajectory deviation |
@@ -31,8 +33,9 @@ Generated: 2026-10-16T23:54:57.517398
 ---
 
 ## 3. Subsystem Breakdown (Active Perception vs. Manipulation)
+
 | Subsystem | Joint Indices | Action MSE (rad²) | Action MAE (rad) | Primary Function |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Active Perception (Neck)** | Joints 0–6 (7 DOF) | **0.000245** | 0.011233 | Gaze centering & dynamic target tracking |
 | **Right Arm Manipulation** | Joints 7–14 (8 DOF) | **0.001584** | 0.016571 | Primary reaching & picking arm |
 | **Left Arm Manipulation** | Joints 15–22 (8 DOF) | **0.003431** | 0.017784 | Secondary / bimanual coordination |
@@ -41,8 +44,9 @@ Generated: 2026-10-16T23:54:57.517398
 ---
 
 ## 4. Trajectory Dynamics & Smoothness (Robotics Quality)
+
 | Metric | Value | Unit | Evaluation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Predicted Trajectory Jerk** | **0.008304** | rad²/step² | Motor acceleration variance |
 | **Ground Truth Jerk** | **0.002533** | rad²/step² | Human teleoperator demonstration jerk |
 | **Jerk Ratio (Pred / GT)** | **3.279** | — | Ratio near 1.0 indicates natural human-like smoothness |
@@ -50,8 +54,9 @@ Generated: 2026-10-16T23:54:57.517398
 ---
 
 ## 5. Hardware Latency, Throughput & Memory
+
 | Metric | Value | Unit | Real-Time Assessment |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Mean Inference Latency** | **138.97** | ms | Microsecond CUDA event benchmark |
 | **Median Latency** | 131.5 | ms | Typical execution time |
 | **P95 Latency** | **196.23** | ms | Worst-case real-time latency bound |
