@@ -221,6 +221,15 @@ rviz2 -d /opt/ros/humble/share/nav2_bringup/rviz/nav2_default_view.rviz
 
 *Verification:* RViz 2 loads with Nav2 map, global/local costmaps, and the Navigation 2 panel status shows `active` or `idle`.
 
+> [!TIP]  
+> **If opening an empty RViz2 instance manually (`rviz2`):**  
+> 1. Set **Fixed Frame** to `map`.  
+> 2. Add **Map** (Topic: `/map`, Durability: `Transient Local`).  
+> 3. Add **Map** for Global Costmap (Topic: `/global_costmap/costmap`).  
+> 4. Add **Map** for Local Costmap (Topic: `/local_costmap/costmap`).  
+> 5. Add **LaserScan** (Topic: `/scan`).  
+> 6. Add **RobotModel** (Topic: `/robot_description`).  
+
 ---
 
 ### 5.3 Initial Localization (2D Pose Estimate)
@@ -256,5 +265,45 @@ AMCL requires an initial pose estimate to align LiDAR readings with the saved ma
    - Continue adding waypoints (**Waypoint 3**, **Waypoint 4**, etc.). Each point is marked with an indexed numbered circle on the map.
 3. Click the green **Start Waypoint Following** button in the left Navigation 2 panel.
 4. **Verification:** The robot autonomously navigates sequentially through Waypoint 1 $\to$ Waypoint 2 $\to$ Waypoint 3... and completes the entire patrol cycle.
+
+---
+
+## 6. Troubleshooting: APT Locks, Mirror IP Blocking (403 Forbidden) & Expired GPG Key
+
+When installing dependency packages (`ros2_control`, `ros2_controllers`, `gazebo_ros2_control`), you may encounter package manager issues on Ubuntu virtual machines:
+- **APT Process Lock (`dpkg frontend lock held by unattended-upgr`):** Caused by background automatic update services holding the package manager lock.
+- **Mirror IP Blocking (`403 Forbidden` from Tsinghua mirror) & Key Errors (`EXPKEYSIG`):** Caused by access restrictions on third-party mirrors and an expired ROS 2 GPG signing key.
+
+Execute the following 3-step recovery procedure:
+
+### Step 1: Terminate Locking Processes & Clear Lock Files
+```bash
+sudo killall -9 apt apt-get unattended-upgr 2>/dev/null || true
+sudo rm -f /var/lib/apt/lists/lock /var/cache/apt/archives/lock /var/lib/dpkg/lock*
+sudo dpkg --configure -a
+```
+
+### Step 2: Refresh ROS 2 GPG Keyring & Switch to Official Upstream Mirrors
+```bash
+# Update GPG keyring to latest Open Robotics key
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+# Set official Open Robotics package repository
+sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list'
+
+# Replace restricted Tsinghua mirror with official archive.ubuntu.com
+sudo sed -i 's/mirrors.tuna.tsinghua.edu.cn/archive.ubuntu.com/g' /etc/apt/sources.list
+sudo sed -i 's/mirrors.tuna.tsinghua.edu.cn/archive.ubuntu.com/g' /etc/apt/sources.list.d/*.list 2>/dev/null || true
+```
+
+### Step 3: Update Cache & Install Required Controller Packages
+```bash
+sudo apt-get clean && sudo apt-get update
+sudo apt-get install -y \
+  ros-humble-ros2-control \
+  ros-humble-ros2-controllers \
+  ros-humble-gazebo-ros2-control \
+  ros-humble-ign-ros2-control
+```
 
 ---
